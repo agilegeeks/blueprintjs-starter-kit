@@ -2,16 +2,175 @@
 @import "~@blueprintjs/core/lib/css/blueprint.css";
 @import "~@blueprintjs/icons/lib/css/blueprint-icons.css";
 
-.wrapper {
+.ag-grid-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 50px 1fr 50px;
+    grid-template-areas:
+        "header"
+        "main"
+        "footer";
+    height: 100vh;
+}
+
+.ag-header {
+    grid-area: header;
+}
+
+.ag-sidenav {
+    grid-area: sidenav;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    height: 100%;
+    width: 240px;
+    position: fixed;
+    overflow-y: auto;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16),
+        0 0 0 1px rgba(0, 0, 0, 0.08);
+    z-index: 2;
+    background-color: #394263;
+    transform: translateX(-245px);
+    transition: all .6s ease-in-out;
 }
 
-.sidebar {
-    flex: 1;
-    z-index: 100;
+.ag-sidenav.active {
+    transform: translateX(0);
 }
 
-.main-content{
-    flex: 5;
+.ag-sidenav__close-icon {
+    position: absolute;
+    visibility: visible;
+    top: 8px;
+    right: 12px;
+    cursor: pointer;
+    font-size: 20px;
+    color: #ddd;
+}
+
+.ag-sidenav__list {
+    padding: 0;
+    margin-top: 85px;
+    list-style-type: none;
+}
+
+.ag-sidenav__list-item {
+    padding: 20px 20px 20px 40px;
+    color: #ddd;
+}
+
+.ag-sidenav__list-item:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+}
+
+.ag-menu-icon {
+    position: fixed;
+    display: flex;
+    top: 5px;
+    left: 10px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    z-index: 1;
+    cursor: pointer;
+    padding: 12px;
+    background-color: #dadae3;
+}
+
+.ag-header__search {
+    margin-left: 42px;
+}
+
+.ag-main {
+    grid-area: main;
+    background-color: #8fd4d9;
+}
+
+.ag-main-header {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+    padding: 20px;
+    height: 150px;
+    background-color: #e3e4e6;
+    color: slategray;
+}
+
+.ag-main-overview {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(265px, 1fr));
+    grid-auto-rows: 94px;
+    grid-gap: 20px;
+    margin: 20px;
+}
+
+.ag-overviewcard {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #d3d3;
+}
+
+.ag-main-cards {
+    column-count: 1;
+    column-gap: 20px;
+    margin: 20px;
+}
+
+.ag-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    background-color: #82bef6;
+    margin-bottom: 20px;
+    -webkit-column-break-inside: avoid;
+    padding: 24px;
+    box-sizing: border-box;
+}
+
+.ag-card:first-child {
+    height: 485px;
+}
+
+.ag-card:nth-child(2) {
+    height: 200px;
+}
+
+.ag-card:nth-child(3) {
+    height: 265px;
+}
+
+.ag-footer {
+    grid-area: footer;
+}
+
+.ag-header, .ag-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    background-color: #648ca6;
+}
+
+@media only screen and (min-width: 46.875em) {
+    .ag-grid-container {
+        grid-template-columns: 240px 1fr;
+        grid-template-areas:
+            "sidenav header"
+            "sidenav main"
+            "sidenav footer";
+    }
+
+    .ag-sidenav {
+        position: relative;
+        transform: translateX(0);
+    }
+}
+
+@media only screen and (min-width: 65.625em) {
+    .ag-main-cards {
+        column-count: 2;
+    }
 }
