@@ -4,17 +4,13 @@
 
 .ag-grid-container {
     display: grid;
-    grid-template-columns: 240px 1fr;
+    grid-template-columns: 1fr;
     grid-template-rows: 50px 1fr 50px;
     grid-template-areas:
-        "sidenav header"
-        "sidenav main"
-        "sidenav footer";
+        "header"
+        "main"
+        "footer";
     height: 100vh;
-}
-
-.ag-grid-container.mini {
-    grid-template-columns: 80px 1fr;
 }
 
 .ag-header {
@@ -23,21 +19,22 @@
 
 .ag-sidenav {
     grid-area: sidenav;
-    position: relative;
     display: flex;
     flex-direction: column;
     height: 100%;
     width: 240px;
+    position: fixed;
     overflow-y: auto;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16),
-    0 0 0 1px rgba(0, 0, 0, 0.08);
+        0 0 0 1px rgba(0, 0, 0, 0.08);
     z-index: 2;
     background-color: #394263;
-    transform: translateX(0);
+    transform: translateX(-245px);
+    transition: all .6s ease-in-out;
 }
 
-.ag-sidenav.mini {
-    width: 80px;
+.ag-sidenav.active {
+    transform: translateX(0);
 }
 
 .ag-sidenav__close-icon {
@@ -70,17 +67,19 @@
     position: fixed;
     display: flex;
     top: 5px;
-    left: 250px;
+    left: 10px;
     align-items: center;
     justify-content: center;
     border-radius: 50%;
     z-index: 1;
     cursor: pointer;
     padding-top: 5px;
+    /* padding: 12px;
+    background-color: #dadae3; */
 }
 
-.ag-menu-icon.mini {
-    left: 90px;
+.ag-menu-icon.active {
+    left: 250px;
 }
 
 .ag-header__search {
@@ -161,6 +160,19 @@
 }
 
 @media only screen and (min-width: 46.875em) {
+    .ag-grid-container {
+        grid-template-columns: 240px 1fr;
+        grid-template-areas:
+            "sidenav header"
+            "sidenav main"
+            "sidenav footer";
+    }
+
+    .ag-sidenav {
+        position: relative;
+        transform: translateX(0);
+    }
+
     .ag-menu-icon {
         left: 250px;
     }

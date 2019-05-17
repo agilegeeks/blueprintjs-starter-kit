@@ -8,28 +8,20 @@ export default class App extends Component {
         open: true
     };
 
-    showSidenav = (e) => {
-        this.setState({open: true});
-    }
-
-    hideSidenav = (e) => {
-        this.setState({open: false});
+    toggleSidenav = (e) => {
+        this.setState({open: !this.state.open});
     }
 
     render() {
         const { open } = this.state;
         return (
-            <div className="ag-grid-container">
-                <div className="ag-menu-icon">
-                    <Button minimal small onClick={this.showSidenav} icon={IconNames.LIST}>
-                        {/* <Icon icon={IconNames.LIST}/> */}
-                    </Button>
+            <div className={open ? 'ag-grid-container active mini' : 'ag-grid-container'}>
+                <div className={open ? 'ag-menu-icon active mini': 'ag-menu-icon'}>
+                    <Button minimal onClick={this.toggleSidenav} icon={<Icon icon={IconNames.LIST} color="#ddd" />}/>
                 </div>
                 <div className="ag-header"></div>
-                <div className={open ? 'ag-sidenav active' : 'ag-sidenav'}>
-                    <div className="ag-sidenav__close-icon">
-                        <Icon icon={IconNames.CHEVRON_LEFT} onClick={this.hideSidenav}/>
-                    </div>
+                <div className={open ? 'ag-sidenav active mini' : 'ag-sidenav'}>
+                    <div className="ag-sidenav__header"></div>
                     <ul className="ag-sidenav__list">
                         <li className="ag-sidenav__list-item">Item One</li>
                         <li className="ag-sidenav__list-item">Item Two</li>
